@@ -1,13 +1,13 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 def linearly_edge_reinforced_random_walk_plane(steps, c):
-    current_pos = np.array([100, 100])
+    current_pos = np.array([75, 75])
 
     # plt.plot(current_pos[0], current_pos[1], 'ro', markersize=5, markerfacecolor='r')
 
-    move_weights = np.ones((200, 200, 200, 200))
+    move_weights = np.ones((150, 150, 150, 150))
 
     for i in range(1, steps):
         neighbors = get_neighbors(current_pos)
@@ -33,8 +33,8 @@ def linearly_edge_reinforced_random_walk_plane(steps, c):
     # plt.ylabel('Y')
     # plt.title('Linearly Edge-Reinforced Random Walk on 2D Plane')
     # plt.show()
-    x = abs(current_pos[0] - 100)
-    y = abs(current_pos[1] - 100)
+    x = abs(current_pos[0] - 50)
+    y = abs(current_pos[1] - 50)
     return x + y
 
 def get_neighbors(pos):
@@ -72,17 +72,17 @@ def get_proccess_stats():
     for a in range (15,1001,5):
         _index.append(a)
     print(_index)
-    for b in range (3,101):
+    for b in range (3,51):
         _columns.append(b)
     print(_columns)
-    for c in range(1,11):
+    for c in range(10,11):
         print(f'instant {c} begins...')
-        w, h = 100, 200
+        w, h = 50, 200
         Matrix = [[0 for x in range(w)] for y in range(h)] 
         for steps in range(5,1001,5):
             print(f'begining {steps} steps walk')
-            for i in range(1,101):
-                print(f'doing {i}th try for {steps} steps')
+            for i in range(1,51):
+                print(f'doing {i}th try for {steps} steps for c = {c}')
                 distance = linearly_edge_reinforced_random_walk_plane(steps, c)
                 Matrix[int(steps/5) - 1][i - 1] = distance
         df = pd.DataFrame(Matrix,
